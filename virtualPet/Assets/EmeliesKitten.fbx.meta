@@ -199,6 +199,7 @@ ModelImporter:
     7400018: Armature|SailJump
     7400020: Armature|SailJump.001
     9500000: //RootNode
+    11100000: //RootNode
     13700000: kitt_Body1
     13700002: kitt_Cornea1
     13700004: kitt_Hair1
@@ -263,7 +264,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
