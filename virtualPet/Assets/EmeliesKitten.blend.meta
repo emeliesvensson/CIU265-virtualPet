@@ -144,6 +144,11 @@ ModelImporter:
     7400004: Armature_Take_001_BaseLayer_001
     7400006: Armature_Take_001_BaseLayer_002
     7400008: Sad
+    7400010: Happy
+    7400012: HappyJump
+    7400014: Jump
+    7400016: ArmatureAction
+    7400018: SailJump
     9500000: //RootNode
     13700000: kitt_Body1
     13700002: kitt_Cornea1
