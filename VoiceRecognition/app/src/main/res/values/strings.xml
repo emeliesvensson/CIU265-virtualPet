@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">VoiceRecognition</string>
+
+    <string name="hello_world">Start recognizing speech!</string>
+    <string name="action_settings">Settings</string>
+    <string name="recognize_voice">Recognize voice</string>
+    <string name="stop_recognizing">Stop recognizing</string>
+    <string name="null_returned">Null returned</string>
+    <string name="ready_speak">Ready to speak!</string>
+</resources>
