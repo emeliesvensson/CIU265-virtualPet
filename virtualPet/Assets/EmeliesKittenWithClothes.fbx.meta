@@ -204,6 +204,7 @@ ModelImporter:
     2300008: Sphere
     2300010: Sphere.001
     2300012: Sphere.002
+    2300014: LeftMouthString
     3300000: Cylinder
     3300002: Cylinder.001
     3300004: mouthProtection
@@ -211,6 +212,7 @@ ModelImporter:
     3300008: Sphere
     3300010: Sphere.001
     3300012: Sphere.002
+    3300014: LeftMouthString
     4300000: Cylinder.001
     4300002: LeftMouthString
     4300004: RightMouthString
