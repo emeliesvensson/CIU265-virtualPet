@@ -2,10 +2,12 @@
 using System.Collections;
 
 public class TriggerAnimations : MonoBehaviour {
-	public AnimationClip sad;
+	public AnimationClip angry;
 	public AnimationClip sailJump;
 	public AnimationClip happy;
 	private Animation anim;
+
+	int fingerCount;
 
 
 	// Use this for initialization
@@ -19,20 +21,32 @@ public class TriggerAnimations : MonoBehaviour {
 		//TODO remove from here when it can be controlled by voice
 		if (Input.GetKeyDown ("t")) {
 			Debug.Log("pressed t");
-			triggerSad();
+			triggerAngry();
 		}else if(Input.GetKeyDown ("y")){
 			Debug.Log("pressed y");
 			triggerHappySailJump();
 		}
+
+		fingerCount = 0;
+		foreach (Touch touch in Input.touches) {
+			if (touch.phase != TouchPhase.Ended && touch.phase != TouchPhase.Canceled)
+				fingerCount++;
+			
+		}
+		if (fingerCount == 1)
+			triggerAngry ();
+		else if (fingerCount > 1)
+			triggerHappySailJump ();
+
 		//TODO remove to here
 
 		if (!anim.isPlaying) {
 			anim.CrossFade (happy.name);
 		}
 	}
-	public void triggerSad(){
+	public void triggerAngry(){
 
-		anim.CrossFade (sad.name);
+		anim.CrossFade (angry.name);
 	}
 
 	public void triggerHappySailJump(){
