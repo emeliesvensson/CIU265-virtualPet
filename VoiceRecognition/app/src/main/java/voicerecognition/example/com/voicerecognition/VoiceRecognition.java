@@ -1,65 +1,42 @@
 package voicerecognition.example.com.voicerecognition;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class VoiceRecognition {
 
     private SpeechRecognizer speechRecognizer = null;
     private String recognisedText = null;
+    private Activity activity;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        initializeSpeechRecognizer();
-
-        final Button button = (Button) this.findViewById(R.id.button);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (button.getText().equals(getResources().getString(R.string.recognize_voice))) {
-                    Intent intent = new Intent();
-                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "es");
-                    speechRecognizer.startListening(intent);
-                    button.setText(R.string.stop_recognizing);
-                } else {
-                    speechRecognizer.stopListening();
-                    button.setText(R.string.recognize_voice);
-                }
-            }
-        });
+    public VoiceRecognition(Activity activity){
+        this.activity=activity;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public boolean listenAndCheck(String text){
+        Intent intent = new Intent();
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "es");
+        speechRecognizer.startListening(intent);
+        while(recognisedText==null){}
+        boolean areEqual = text.equals(recognisedText);
+        recognisedText=null;
+        return areEqual;
     }
-
 
     public void initializeSpeechRecognizer() {
         if (speechRecognizer == null) {
-            speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
-            final TextView textView = (TextView) this.findViewById(R.id.text_field);
+            speechRecognizer = SpeechRecognizer.createSpeechRecognizer(activity);
             speechRecognizer.setRecognitionListener(new RecognitionListener() {
 
                 @Override
                 public void onReadyForSpeech(Bundle params) {
-                    textView.setText(R.string.ready_speak);
+                    //Do something here?
                 }
 
                 @Override
@@ -81,23 +58,23 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onError(int error) {
                     if (error == SpeechRecognizer.ERROR_AUDIO) {
-                        textView.setText("Audio error");
+                        //
                     } else if (error == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
-                        textView.setText("Speech timeout error");
+                        //
                     } else if (error == SpeechRecognizer.ERROR_CLIENT) {
-                        textView.setText("Client error");
+                       //
                     } else if (error == SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS) {
-                        textView.setText("Insuficient permissions error");
+                        //
                     } else if (error == SpeechRecognizer.ERROR_NETWORK) {
-                        textView.setText("Network error");
+                        //
                     } else if (error == SpeechRecognizer.ERROR_NETWORK_TIMEOUT) {
-                        textView.setText("Network timeout error");
+                        //
                     } else if (error == SpeechRecognizer.ERROR_NO_MATCH) {
-                        textView.setText("No match error");
+                        //
                     } else if (error == SpeechRecognizer.ERROR_RECOGNIZER_BUSY) {
-                        textView.setText("Recognizer busy error");
+                        //
                     } else if (error == SpeechRecognizer.ERROR_SERVER) {
-                        textView.setText("Server error");
+                        //
                     }
                 }
 
@@ -109,8 +86,6 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         recognisedText = "";
                     }
-
-
                 }
 
                 @Override
@@ -123,5 +98,4 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
-
 }
