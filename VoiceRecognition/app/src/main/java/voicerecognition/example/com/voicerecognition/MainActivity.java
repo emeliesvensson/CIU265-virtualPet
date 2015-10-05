@@ -16,7 +16,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private SpeechRecognizer speechRecognizer = null;
-    private String recognisedText = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (button.getText().equals(getResources().getString(R.string.recognize_voice))) {
                     Intent intent = new Intent();
-                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "es");
+                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "sv-SE");
+                    intent.putExtra("android.speech.extra.EXTRA_ADDITIONAL_LANGUAGES", new String[]{});
                     speechRecognizer.startListening(intent);
                     button.setText(R.string.stop_recognizing);
                 } else {
@@ -105,9 +105,9 @@ public class MainActivity extends AppCompatActivity {
                 public void onResults(Bundle results) {
                     List<String> resultList = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                     if (resultList != null) {
-                        recognisedText=resultList.get(0);
+                        textView.setText(resultList.get(0));
                     } else {
-                        recognisedText = "";
+                        textView.setText(R.string.null_returned);
                     }
 
 

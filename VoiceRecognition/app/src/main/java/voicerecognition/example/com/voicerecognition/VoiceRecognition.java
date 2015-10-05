@@ -22,9 +22,10 @@ public class VoiceRecognition {
     public boolean listenAndCheck(String text){
         Intent intent = new Intent();
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "es");
+        intent.putExtra("android.speech.extra.EXTRA_ADDITIONAL_LANGUAGES", new String[]{});
         speechRecognizer.startListening(intent);
         while(recognisedText==null){}
-        boolean areEqual = text.equals(recognisedText);
+        boolean areEqual = text.toLowerCase().equals(recognisedText);
         recognisedText=null;
         return areEqual;
     }
