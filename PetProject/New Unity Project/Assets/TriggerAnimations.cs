@@ -6,6 +6,7 @@ public class TriggerAnimations : MonoBehaviour {
 	public AnimationClip sailJump;
 	public AnimationClip happy;
 	private Animation anim;
+	private GameObject canvas;
 
 	int fingerCount;
 
@@ -14,6 +15,7 @@ public class TriggerAnimations : MonoBehaviour {
 	void Start () {
 		anim = GetComponent<Animation>();
 		Debug.Log (anim.GetClipCount());
+		canvas = GameObject.FindGameObjectWithTag ("Canvas");
 	}
 	
 	// Update is called once per frame
@@ -34,9 +36,9 @@ public class TriggerAnimations : MonoBehaviour {
 			
 		}
 		if (fingerCount == 1)
-			triggerAngry ();
-		else if (fingerCount > 1)
 			triggerHappySailJump ();
+		else if (fingerCount > 1)	
+			triggerAngry ();
 
 		//TODO remove to here
 
@@ -51,6 +53,7 @@ public class TriggerAnimations : MonoBehaviour {
 
 	public void triggerHappySailJump(){
 		anim.CrossFade (sailJump.name);
+		canvas.GetComponent<Conversations> ().ChangeText ();
 	}
 
 }
