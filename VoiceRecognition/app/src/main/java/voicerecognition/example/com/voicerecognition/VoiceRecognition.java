@@ -21,7 +21,7 @@ public class VoiceRecognition {
 
     public boolean listenAndCheck(String text){
         Intent intent = new Intent();
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "es");
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "fr");
         intent.putExtra("android.speech.extra.EXTRA_ADDITIONAL_LANGUAGES", new String[]{});
         speechRecognizer.startListening(intent);
         while(recognisedText==null){}
