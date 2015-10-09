@@ -3,7 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class Conversations : MonoBehaviour {
-	public string [] lines;
+	public string [] spanishLines;
+	public string [] frenchLines;
 	private int i=0;
 
 
@@ -19,7 +20,7 @@ public class Conversations : MonoBehaviour {
 
 	public void ChangeText(){
 		foreach (Text txt in this.gameObject.GetComponentsInChildren<Text> () ){
-			txt.text=lines[i % lines.Length];
+			txt.text=frenchLines[i % frenchLines.Length];
 		}
 		i++;
 	}
