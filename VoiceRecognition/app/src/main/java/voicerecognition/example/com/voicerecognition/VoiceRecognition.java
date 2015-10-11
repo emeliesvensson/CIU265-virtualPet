@@ -59,7 +59,7 @@ public class VoiceRecognition {
     }
     //new test end
 
-
+/*
     public boolean listenAndCheck(String text){
         Intent intent = new Intent();
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "fr");
@@ -72,6 +72,25 @@ public class VoiceRecognition {
         recognisedText=null;
 
         return true;
+    }*/
+
+    public boolean listenAndCheck(String text){
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent();
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "fr");
+        intent.putExtra("android.speech.extra.EXTRA_ADDITIONAL_LANGUAGES", new String[]{});
+        speechRecognizer.startListening(intent);
+        Toast.makeText(context, "Started listening", Toast.LENGTH_SHORT).show();
+        if(recognisedText==null){
+            Toast.makeText(context, "Didn't work", Toast.LENGTH_SHORT).show();
+            return false;
+        }else{
+            Toast.makeText(context, "Worked!", Toast.LENGTH_SHORT).show();
+            Boolean areEqual = text.toLowerCase().equals(recognisedText);
+            recognisedText=null;
+            Toast.makeText(context, areEqual.toString(), Toast.LENGTH_SHORT).show();
+            return areEqual;
+        }
     }
 
     public void initializeSpeechRecognizer() {

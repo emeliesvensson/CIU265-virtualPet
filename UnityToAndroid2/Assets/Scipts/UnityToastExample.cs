@@ -71,12 +71,12 @@ public class UnityToastExample : MonoBehaviour
 		{
 			Text text = GameObject.FindGameObjectWithTag("TextTag").GetComponent<Text>();
 			
-		
+
 
 			activityContext.Call("runOnUiThread", new AndroidJavaRunnable(() =>
 			                                                              {
-				if(toastExample.Call<bool>("listenAndCheck", "Hola!"))
-					text.text = "HOLA";
+				toastExample.Call<bool>("listenAndCheck", "Hola!");
+
 			}));
 
 		}
