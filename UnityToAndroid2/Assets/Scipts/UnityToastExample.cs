@@ -59,15 +59,25 @@ public class UnityToastExample : MonoBehaviour
 			Text text = GameObject.FindGameObjectWithTag("TextTag").GetComponent<Text>();
 		//	text.text = "Initialize VoiceRecognizer";
 
-			text.text = toastExample.Call<string>("initializeSpeechRecognizer");
+			activityContext.Call("runOnUiThread", new AndroidJavaRunnable(() =>
+			                                                              {
+				//text.text = toastExample.Call<string>("initializeSpeechRecognizer");
+				toastExample.Call("initializeSpeechRecognizer");
+			}));
+
 		}
 
 		if (GUI.Button (new Rect (h * 0.1f, h * 0.7f, w * 0.5f, h * 0.2f), "Start Voice"))
 		{
 			Text text = GameObject.FindGameObjectWithTag("TextTag").GetComponent<Text>();
 			
-			if(toastExample.Call<bool>("listenAndCheck", "Hola!"))
-				text.text = "HOLA";
+		
+
+			activityContext.Call("runOnUiThread", new AndroidJavaRunnable(() =>
+			                                                              {
+				if(toastExample.Call<bool>("listenAndCheck", "Hola!"))
+					text.text = "HOLA";
+			}));
 
 		}
 		

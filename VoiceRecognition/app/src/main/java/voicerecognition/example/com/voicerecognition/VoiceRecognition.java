@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Debug;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
@@ -64,19 +65,16 @@ public class VoiceRecognition {
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "fr");
         intent.putExtra("android.speech.extra.EXTRA_ADDITIONAL_LANGUAGES", new String[]{});
         speechRecognizer.startListening(intent);
-        while(recognisedText==null){}
+      //  while(recognisedText==null){}
         boolean areEqual = text.toLowerCase().equals(recognisedText);
 
-        showMessage(recognisedText);
 
         recognisedText=null;
 
-        return areEqual;
+        return true;
     }
 
-    public String initializeSpeechRecognizer() {
-       // showMessage("Starting to Initzialize Voicerecognition");
-
+    public void initializeSpeechRecognizer() {
         if (speechRecognizer == null) {
           //  speechRecognizer = SpeechRecognizer.createSpeechRecognizer(activity);
             speechRecognizer = SpeechRecognizer.createSpeechRecognizer(context);
@@ -145,8 +143,6 @@ public class VoiceRecognition {
                 }
             });
         }
-      //  showMessage("Initzialized Voicerecognition");
 
-        return "INITIALIZING DONE";
     }
 }
