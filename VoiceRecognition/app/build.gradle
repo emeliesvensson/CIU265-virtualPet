@@ -18,6 +18,7 @@ android {
     }
     buildTypes {
         release {
+            debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -25,14 +26,15 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:23.0.0'
     compile files('libs/classes.jar')
+    compile files('lib/AndroidPlugin.jar')
 }
 
 //task to delete the old jar
 task deleteOldJar(type: Delete) {
-    delete 'release/AndroidPlugin.jar'
+    delete 'release/TestPlugin.jar'
 }
 
 //task to export contents as jar
@@ -41,7 +43,7 @@ task exportJar(type: Copy) {
     into('release/')
     include('classes.jar')
     ///Rename the jar
-    rename('classes.jar', 'AndroidPlugin.jar')
+    rename('classes.jar', 'TestPlugin.jar')
 }
 
 exportJar.dependsOn(deleteOldJar, build)

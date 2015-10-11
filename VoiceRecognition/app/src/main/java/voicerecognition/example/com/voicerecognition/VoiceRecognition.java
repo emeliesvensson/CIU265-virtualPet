@@ -1,11 +1,14 @@
 package voicerecognition.example.com.voicerecognition;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.speech.tts.Voice;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -15,9 +18,46 @@ public class VoiceRecognition {
     private String recognisedText = null;
     private Activity activity;
 
-    public VoiceRecognition(Activity activity){
+    //For the new test
+    private Context context;
+    private static VoiceRecognition instance;
+
+   /* Maybe needed for several activities
+   public VoiceRecognition(Activity activity){
+
         this.activity=activity;
+    }*/
+
+    //for the new test
+    public VoiceRecognition() {
+        this.instance = this;
     }
+
+    public static VoiceRecognition instance(){
+        if(instance == null){
+            instance = new VoiceRecognition();
+        }
+        return  instance;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public void showMessage(String message){
+        Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show();
+    }
+
+
+    public boolean getBool(){
+        return true;
+    }
+
+    public String returnString(String text ) {
+        return text;
+    }
+    //new test end
+
 
     public boolean listenAndCheck(String text){
         Intent intent = new Intent();
@@ -26,13 +66,20 @@ public class VoiceRecognition {
         speechRecognizer.startListening(intent);
         while(recognisedText==null){}
         boolean areEqual = text.toLowerCase().equals(recognisedText);
+
+        showMessage(recognisedText);
+
         recognisedText=null;
+
         return areEqual;
     }
 
-    public void initializeSpeechRecognizer() {
+    public String initializeSpeechRecognizer() {
+       // showMessage("Starting to Initzialize Voicerecognition");
+
         if (speechRecognizer == null) {
-            speechRecognizer = SpeechRecognizer.createSpeechRecognizer(activity);
+          //  speechRecognizer = SpeechRecognizer.createSpeechRecognizer(activity);
+            speechRecognizer = SpeechRecognizer.createSpeechRecognizer(context);
             speechRecognizer.setRecognitionListener(new RecognitionListener() {
 
                 @Override
@@ -98,5 +145,8 @@ public class VoiceRecognition {
                 }
             });
         }
+      //  showMessage("Initzialized Voicerecognition");
+
+        return "INITIALIZING DONE";
     }
 }
