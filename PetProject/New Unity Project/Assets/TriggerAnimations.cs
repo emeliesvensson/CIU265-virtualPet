@@ -31,15 +31,15 @@ public class TriggerAnimations : MonoBehaviour {
 
 		fingerCount = 0;
 		foreach (Touch touch in Input.touches) {
-			if (touch.phase != TouchPhase.Ended && touch.phase != TouchPhase.Canceled)
+			if (touch.phase == TouchPhase.Began && touch.phase != TouchPhase.Canceled)
 				fingerCount++;
 			
 		}
+
 		if (fingerCount == 1)
 			triggerHappySailJump ();
 		else if (fingerCount > 1)	
 			triggerAngry ();
-
 		//TODO remove to here
 
 		if (!anim.isPlaying) {
