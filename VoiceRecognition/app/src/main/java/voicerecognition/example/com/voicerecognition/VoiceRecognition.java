@@ -93,6 +93,22 @@ public class VoiceRecognition {
         }
     }
 
+
+    public void listenAndCheck2(boolean value){
+        if (value) {
+            Intent intent = new Intent();
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "fr");
+            intent.putExtra("android.speech.extra.EXTRA_ADDITIONAL_LANGUAGES", new String[]{});
+            speechRecognizer.startListening(intent);
+            Toast.makeText(context, "Starting to listen", Toast.LENGTH_SHORT).show();
+
+        } else {
+            speechRecognizer.stopListening();
+            Toast.makeText(context, recognisedText, Toast.LENGTH_SHORT).show();
+          //  recognisedText = "";
+        }
+    }
+
     public void initializeSpeechRecognizer() {
         if (speechRecognizer == null) {
           //  speechRecognizer = SpeechRecognizer.createSpeechRecognizer(activity);
@@ -123,23 +139,32 @@ public class VoiceRecognition {
                 @Override
                 public void onError(int error) {
                     if (error == SpeechRecognizer.ERROR_AUDIO) {
-                        //
+                        Toast.makeText(context, "1", Toast.LENGTH_SHORT).show();
+
                     } else if (error == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
-                        //
+                        Toast.makeText(context, "2", Toast.LENGTH_SHORT).show();
+
                     } else if (error == SpeechRecognizer.ERROR_CLIENT) {
-                       //
+                        Toast.makeText(context, "3", Toast.LENGTH_SHORT).show();
+
                     } else if (error == SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS) {
-                        //
+                        Toast.makeText(context, "4", Toast.LENGTH_SHORT).show();
+
                     } else if (error == SpeechRecognizer.ERROR_NETWORK) {
-                        //
+                        Toast.makeText(context, "5", Toast.LENGTH_SHORT).show();
+
                     } else if (error == SpeechRecognizer.ERROR_NETWORK_TIMEOUT) {
-                        //
+                        Toast.makeText(context, "6", Toast.LENGTH_SHORT).show();
+
                     } else if (error == SpeechRecognizer.ERROR_NO_MATCH) {
-                        //
+                        Toast.makeText(context, "7", Toast.LENGTH_SHORT).show();
+
                     } else if (error == SpeechRecognizer.ERROR_RECOGNIZER_BUSY) {
-                        //
+                        Toast.makeText(context, "8", Toast.LENGTH_SHORT).show();
+
                     } else if (error == SpeechRecognizer.ERROR_SERVER) {
-                        //
+                        Toast.makeText(context, "9", Toast.LENGTH_SHORT).show();
+
                     }
                 }
 
@@ -149,7 +174,7 @@ public class VoiceRecognition {
                     if (resultList != null) {
                         recognisedText=resultList.get(0);
                     } else {
-                        recognisedText = "";
+                        recognisedText = "Null Returned";
                     }
                 }
 

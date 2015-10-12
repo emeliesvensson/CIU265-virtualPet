@@ -26,6 +26,12 @@ public class UnityToastExample : MonoBehaviour
 					toastExample.Call("setContext", activityContext);
 				}
 			}
+
+			activityContext.Call("runOnUiThread", new AndroidJavaRunnable(() =>
+			                                                              {
+				//text.text = toastExample.Call<string>("initializeSpeechRecognizer");
+				toastExample.Call("initializeSpeechRecognizer");
+			}));
 		}
 	}
 
@@ -54,20 +60,20 @@ public class UnityToastExample : MonoBehaviour
 				text.text = "TRUE";
 		}
 
-		if (GUI.Button (new Rect (h * 0.1f, h * 0.5f, w * 0.5f, h * 0.2f), "Initialize Voice"))
+		if (GUI.Button (new Rect (h * 0.1f, h * 0.5f, w * 0.5f, h * 0.2f), "Start Listening"))
 		{
-			Text text = GameObject.FindGameObjectWithTag("TextTag").GetComponent<Text>();
+		//	Text text = GameObject.FindGameObjectWithTag("TextTag").GetComponent<Text>();
 		//	text.text = "Initialize VoiceRecognizer";
 
 			activityContext.Call("runOnUiThread", new AndroidJavaRunnable(() =>
 			                                                              {
-				//text.text = toastExample.Call<string>("initializeSpeechRecognizer");
-				toastExample.Call("initializeSpeechRecognizer");
+				toastExample.Call("listenAndCheck2", true);
+				
 			}));
 
 		}
 
-		if (GUI.Button (new Rect (h * 0.1f, h * 0.7f, w * 0.5f, h * 0.2f), "Start Voice"))
+		if (GUI.Button (new Rect (h * 0.1f, h * 0.7f, w * 0.5f, h * 0.2f), "Stop Listening"))
 		{
 			Text text = GameObject.FindGameObjectWithTag("TextTag").GetComponent<Text>();
 			
@@ -75,7 +81,7 @@ public class UnityToastExample : MonoBehaviour
 
 			activityContext.Call("runOnUiThread", new AndroidJavaRunnable(() =>
 			                                                              {
-				toastExample.Call<bool>("listenAndCheck", "Hola!");
+				toastExample.Call("listenAndCheck2", false);
 
 			}));
 
