@@ -7,9 +7,13 @@ public class UnityToastExample : MonoBehaviour
 	
 	private AndroidJavaObject toastExample = null;
 	private AndroidJavaObject activityContext = null;
+	Text text;
+	bool isReady;
 	
 	void Start() 
 	{
+		text = GameObject.FindGameObjectWithTag("TextTag").GetComponent<Text>();
+
 		if(toastExample == null)
 		{
 			using(AndroidJavaClass activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
@@ -36,14 +40,15 @@ public class UnityToastExample : MonoBehaviour
 	}
 
 	void Update(){
-
+		text.text = toastExample.Call<string> ("getRecognisedText");
+		isReady = toastExample.Call<bool> ("isReady");
 	}
 
 	void OnGUI() 
 	{
 		int h = Screen.height;
 		int w = Screen.width;
-		
+		/*
 		if (GUI.Button (new Rect (h * 0.1f, h * 0.1f, w * 0.5f, h * 0.2f), "Toast"))
 		{
 			activityContext.Call("runOnUiThread", new AndroidJavaRunnable(() =>
@@ -59,7 +64,8 @@ public class UnityToastExample : MonoBehaviour
 			if(toastExample.Call<bool>("getBool"))
 				text.text = "TRUE";
 		}
-
+		*/
+		if(isReady)
 		if (GUI.Button (new Rect (h * 0.1f, h * 0.5f, w * 0.5f, h * 0.2f), "Start Listening"))
 		{
 		//	Text text = GameObject.FindGameObjectWithTag("TextTag").GetComponent<Text>();
@@ -67,21 +73,22 @@ public class UnityToastExample : MonoBehaviour
 
 			activityContext.Call("runOnUiThread", new AndroidJavaRunnable(() =>
 			                                                              {
-				toastExample.Call("listenAndCheck2", true);
+				toastExample.Call("listenAndCheck2", isReady);
 				
 			}));
 
 		}
 
-		if (GUI.Button (new Rect (h * 0.1f, h * 0.7f, w * 0.5f, h * 0.2f), "Stop Listening"))
+		if(!isReady)
+		if (GUI.Button (new Rect (h * 0.1f, h * 0.5f, w * 0.5f, h * 0.2f), "Stop Listening"))
 		{
-			Text text = GameObject.FindGameObjectWithTag("TextTag").GetComponent<Text>();
+			//Text text = GameObject.FindGameObjectWithTag("TextTag").GetComponent<Text>();
 			
 
 
 			activityContext.Call("runOnUiThread", new AndroidJavaRunnable(() =>
 			                                                              {
-				toastExample.Call("listenAndCheck2", false);
+				toastExample.Call("listenAndCheck2", isReady);
 
 			}));
 

@@ -22,6 +22,7 @@ public class VoiceRecognition {
     //For the new test
     private Context context;
     private static VoiceRecognition instance;
+    private boolean isReady = true;
 
    /* Maybe needed for several activities
    public VoiceRecognition(Activity activity){
@@ -54,9 +55,18 @@ public class VoiceRecognition {
         return true;
     }
 
+    public boolean isReady(){
+        return isReady;
+    }
+
     public String returnString(String text ) {
         return text;
     }
+
+    public String getRecognisedText(){
+        return recognisedText;
+    }
+
     //new test end
 
 /*
@@ -99,13 +109,19 @@ public class VoiceRecognition {
             Intent intent = new Intent();
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "fr");
             intent.putExtra("android.speech.extra.EXTRA_ADDITIONAL_LANGUAGES", new String[]{});
+
+            isReady = false;
+
             speechRecognizer.startListening(intent);
-            Toast.makeText(context, "Starting to listen", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(context, "Starting to listen", Toast.LENGTH_SHORT).show();
 
         } else {
             speechRecognizer.stopListening();
-            Toast.makeText(context, recognisedText, Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(context, recognisedText, Toast.LENGTH_SHORT).show();
+
+            isReady = true;
           //  recognisedText = "";
+
         }
     }
 
@@ -117,7 +133,6 @@ public class VoiceRecognition {
 
                 @Override
                 public void onReadyForSpeech(Bundle params) {
-                    //Do something here?
                 }
 
                 @Override
@@ -134,10 +149,15 @@ public class VoiceRecognition {
 
                 @Override
                 public void onEndOfSpeech() {
+                    isReady = true;
+
                 }
 
                 @Override
                 public void onError(int error) {
+                    isReady = true;
+
+
                     if (error == SpeechRecognizer.ERROR_AUDIO) {
                         Toast.makeText(context, "1", Toast.LENGTH_SHORT).show();
 
