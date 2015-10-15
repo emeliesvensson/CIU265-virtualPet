@@ -28,7 +28,7 @@ public class TriggerAnimations : MonoBehaviour {
 			Debug.Log("pressed y");
 			triggerHappySailJump();
 		}
-
+		/*
 		fingerCount = 0;
 		foreach (Touch touch in Input.touches) {
 			if (touch.phase == TouchPhase.Began && touch.phase != TouchPhase.Canceled)
@@ -39,7 +39,7 @@ public class TriggerAnimations : MonoBehaviour {
 		if (fingerCount == 1)
 			triggerHappySailJump ();
 		else if (fingerCount > 1)	
-			triggerAngry ();
+			triggerAngry ();*/
 		//TODO remove to here
 
 		if (!anim.isPlaying) {

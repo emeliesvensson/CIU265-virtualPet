@@ -43,6 +43,7 @@ public class UnityToastExample : MonoBehaviour
 	}
 
 	void Update(){
+#if UNITY_ANDROID
 		text.text = toastExample.Call<string> ("getRecognisedText");
 		isReady = toastExample.Call<bool> ("isReady");
 
@@ -50,7 +51,7 @@ public class UnityToastExample : MonoBehaviour
 			buttonText.text = "Start Listening";
 		else
 			buttonText.text = "Stop Listening";
-
+#endif
 	}
 
 
