@@ -20,7 +20,8 @@ public class Conversations : MonoBehaviour {
 
 	public void ChangeText(){
 		foreach (Text txt in this.gameObject.GetComponentsInChildren<Text> () ){
-			txt.text=frenchLines[i % frenchLines.Length];
+			if(txt.tag == "ConvoTxt")
+				txt.text=frenchLines[i % frenchLines.Length];
 		}
 		i++;
 	}
