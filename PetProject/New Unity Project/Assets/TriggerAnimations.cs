@@ -53,7 +53,7 @@ public class TriggerAnimations : MonoBehaviour {
 
 	public void triggerHappySailJump(){
 		anim.CrossFade (sailJump.name);
-		canvas.GetComponent<Conversations> ().ChangeText ();
+		//canvas.GetComponent<Conversations> ().ChangeText ();
 	}
 
 }

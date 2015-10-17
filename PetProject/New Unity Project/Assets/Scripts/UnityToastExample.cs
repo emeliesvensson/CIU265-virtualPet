@@ -7,8 +7,11 @@ public class UnityToastExample : MonoBehaviour
 	
 	private AndroidJavaObject toastExample = null;
 	private AndroidJavaObject activityContext = null;
+	public GameObject conver;
 	Text text;
 	Text buttonText;
+	private bool hasListened=false;
+	private bool doOnce=false;
 
 	bool isReady;
 	
@@ -45,12 +48,23 @@ public class UnityToastExample : MonoBehaviour
 	void Update(){
 #if UNITY_ANDROID
 		text.text = toastExample.Call<string> ("getRecognisedText");
-		isReady = toastExample.Call<bool> ("isReady");
 
-		if (isReady) 		
+		isReady = toastExample.Call<bool> ("isReady");
+		if (hasListened&&doOnce){
+			conver.GetComponent<Conversations>().CheckIfCorrectText(toastExample.Call<string> ("getRecognisedText"));
+			//conver.GetComponent<Conversations>().CheckIfCorrectText(text.text);
+			hasListened=false;
+			doOnce=false;
+		}
+
+		if (isReady){ 
 			buttonText.text = "Start Listening";
-		else
+			doOnce=true;
+		}
+		else{
 			buttonText.text = "Stop Listening";
+			hasListened=true;
+		}
 #endif
 	}
 
