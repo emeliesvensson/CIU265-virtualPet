@@ -8,8 +8,9 @@ public class Conversations : MonoBehaviour {
 	private int i=0;
 	private SkinnedMeshRenderer kittBody;
 	public GameObject cat;
-	//private Text saidText;
+	private Text saidText;
 	private int index;
+	private string sCompare;
 
 
 	// Use this for initialization
@@ -17,7 +18,7 @@ public class Conversations : MonoBehaviour {
 		ChangeText ();
 		kittBody= GameObject.FindGameObjectWithTag("EnableBubble").GetComponent<SkinnedMeshRenderer> ();
 		cat = GameObject.FindGameObjectWithTag ("Cat");
-		//saidText= GameObject.FindGameObjectWithTag("TextTag").GetComponent<Text>();
+		saidText= GameObject.FindGameObjectWithTag("TextTag").GetComponent<Text>();
 
 	}
 	
@@ -27,7 +28,8 @@ public class Conversations : MonoBehaviour {
 			EnableText ();
 		} else
 			DisableText ();
-
+		sCompare = saidText.text;
+		//CheckIfCorrectText ();
 	}
 
 	public void ChangeText(){
@@ -52,14 +54,14 @@ public class Conversations : MonoBehaviour {
 		}
 	}
 
-	public void CheckIfCorrectText(string s){
+	public void CheckIfCorrectText(){
 		//TODO Remove from here
-		foreach (Text txt in this.gameObject.GetComponentsInChildren<Text> () ){
+	/*	foreach (Text txt in this.gameObject.GetComponentsInChildren<Text> () ){
 			if(txt.tag == "ConvoTxt")
-				txt.text="compared: "+s.ToLower () + " " +frenchLines [index].ToLower ();
-		}
+				txt.text="compared: "+sCompare.ToLower () + " " +frenchLines [index].ToLower ();
+		}*/
 		//TODO to here
-		if (s.ToLower () == frenchLines [index].ToLower ()) {
+		if (sCompare.ToLower () == frenchLines [index].ToLower ()) {
 			cat.GetComponent<TriggerAnimations> ().triggerHappySailJump ();
 			ChangeText ();
 		}

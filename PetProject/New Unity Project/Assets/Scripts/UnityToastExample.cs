@@ -10,8 +10,8 @@ public class UnityToastExample : MonoBehaviour
 	public GameObject conver;
 	Text text;
 	Text buttonText;
-	private bool hasListened=false;
-	private bool doOnce=false;
+	int temp=0;
+	bool first=true;
 
 	bool isReady;
 	
@@ -50,20 +50,20 @@ public class UnityToastExample : MonoBehaviour
 		text.text = toastExample.Call<string> ("getRecognisedText");
 
 		isReady = toastExample.Call<bool> ("isReady");
-		if (hasListened&&doOnce){
-			conver.GetComponent<Conversations>().CheckIfCorrectText(toastExample.Call<string> ("getRecognisedText"));
-			//conver.GetComponent<Conversations>().CheckIfCorrectText(text.text);
-			hasListened=false;
-			doOnce=false;
+		if (isReady&&text.text!=null&&temp==10&&!first){
+			conver.GetComponent<Conversations>().CheckIfCorrectText();
+
 		}
 
 		if (isReady){ 
 			buttonText.text = "Start Listening";
-			doOnce=true;
+			temp++;
 		}
 		else{
 			buttonText.text = "Stop Listening";
-			hasListened=true;
+			temp=0;
+			first=false;
+
 		}
 #endif
 	}
