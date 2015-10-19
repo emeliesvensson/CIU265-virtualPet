@@ -8,10 +8,13 @@ public class Conversations : MonoBehaviour {
 	public string[] altFrenchLines;
 	private int i=0;
 	private SkinnedMeshRenderer kittBody;
-	public TriggerAnimations cat;
+	private TriggerAnimations cat;
 	private Text saidText;
 	private int index;
 	private string sCompare;
+
+	public AudioClip [] audioLines;
+	public AudioSource soundSource;
 
 
 	// Use this for initialization
@@ -75,7 +78,14 @@ public class Conversations : MonoBehaviour {
 		}
 		else {
 			cat.triggerAngry();
+			PlaySound ();
 		}
 
 	}
+
+	public void PlaySound(){
+		soundSource.clip = audioLines [index];
+		soundSource.Play ();
+	}
 }
+
