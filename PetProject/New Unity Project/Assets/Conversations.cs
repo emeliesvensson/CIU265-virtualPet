@@ -50,6 +50,7 @@ public class Conversations : MonoBehaviour {
 				txt.text=frenchLines[index];
 		}
 		i++;
+		PlaySound ();
 	}
 
 	public void EnableText(){
