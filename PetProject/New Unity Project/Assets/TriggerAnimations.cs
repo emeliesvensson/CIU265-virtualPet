@@ -14,20 +14,20 @@ public class TriggerAnimations : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animation>();
-		Debug.Log (anim.GetClipCount());
-		canvas = GameObject.FindGameObjectWithTag ("Canvas");
+	//	Debug.Log (anim.GetClipCount());
+		//canvas = GameObject.FindGameObjectWithTag ("Canvas");
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//TODO remove from here when it can be controlled by voice
-		if (Input.GetKeyDown ("t")) {
+		/*if (Input.GetKeyDown ("t")) {
 			Debug.Log("pressed t");
 			triggerAngry();
 		}else if(Input.GetKeyDown ("y")){
 			Debug.Log("pressed y");
 			triggerHappySailJump();
-		}
+		}*/
 		/*
 		fingerCount = 0;
 		foreach (Touch touch in Input.touches) {

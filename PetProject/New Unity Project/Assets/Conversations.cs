@@ -5,9 +5,10 @@ using UnityEngine.UI;
 public class Conversations : MonoBehaviour {
 	public string [] spanishLines;
 	public string [] frenchLines;
+	public string[] altFrenchLines;
 	private int i=0;
 	private SkinnedMeshRenderer kittBody;
-	public GameObject cat;
+	public TriggerAnimations cat;
 	private Text saidText;
 	private int index;
 	private string sCompare;
@@ -17,7 +18,7 @@ public class Conversations : MonoBehaviour {
 	void Start () {
 		ChangeText ();
 		kittBody= GameObject.FindGameObjectWithTag("EnableBubble").GetComponent<SkinnedMeshRenderer> ();
-		cat = GameObject.FindGameObjectWithTag ("Cat");
+		cat = GameObject.FindGameObjectWithTag ("Cat").GetComponent<TriggerAnimations> ();
 		saidText= GameObject.FindGameObjectWithTag("TextTag").GetComponent<Text>();
 
 	}
@@ -29,7 +30,14 @@ public class Conversations : MonoBehaviour {
 		} else
 			DisableText ();
 		sCompare = saidText.text;
-		//CheckIfCorrectText ();
+		if (Input.GetKeyDown ("t")) {
+			//Debug.Log("pressed t");
+			cat.triggerAngry();
+		}else if(Input.GetKeyDown ("y")){
+			//Debug.Log("pressed y");
+			cat.triggerHappySailJump();
+			ChangeText();
+		}
 	}
 
 	public void ChangeText(){
@@ -61,12 +69,12 @@ public class Conversations : MonoBehaviour {
 				txt.text="compared: "+sCompare.ToLower () + " " +frenchLines [index].ToLower ();
 		}*/
 		//TODO to here
-		if (sCompare.ToLower () == frenchLines [index].ToLower ()) {
-			cat.GetComponent<TriggerAnimations> ().triggerHappySailJump ();
+		if (sCompare.ToLower () == frenchLines [index].ToLower ()||sCompare.ToLower () == altFrenchLines [index].ToLower ()) {
+			cat.triggerHappySailJump ();
 			ChangeText ();
 		}
 		else {
-			cat.GetComponent<TriggerAnimations> ().triggerAngry();
+			cat.triggerAngry();
 		}
 
 	}
