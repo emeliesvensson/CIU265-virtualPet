@@ -13,12 +13,18 @@ public class UnityToastExample : MonoBehaviour
 	int temp=0;
 	bool first=true;
 
+	Button recordButton;
+
+	public Sprite startRecImg;
+	public Sprite stopRecImg;
+
 	bool isReady;
 	
 	void Start() 
 	{
 		text = GameObject.FindGameObjectWithTag("TextTag").GetComponent<Text>();
 		buttonText = GameObject.FindGameObjectWithTag("ButtonText").GetComponent<Text>();
+		recordButton = GameObject.FindGameObjectWithTag ("RecordButton").GetComponent<Button> ();
 
 		if(toastExample == null)
 		{
@@ -56,11 +62,13 @@ public class UnityToastExample : MonoBehaviour
 		}
 
 		if (isReady){ 
-			buttonText.text = "Start Listening";
+			//buttonText.text = "Start Listening";
+			recordButton.image.overrideSprite = startRecImg;
 			temp++;
 		}
 		else{
-			buttonText.text = "Stop Listening";
+			//buttonText.text = "Stop Listening";
+			recordButton.image.overrideSprite = stopRecImg;
 			temp=0;
 			first=false;
 
