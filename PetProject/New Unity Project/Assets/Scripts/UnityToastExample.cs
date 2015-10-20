@@ -50,7 +50,7 @@ public class UnityToastExample : MonoBehaviour
 		text.text = toastExample.Call<string> ("getRecognisedText");
 
 		isReady = toastExample.Call<bool> ("isReady");
-		if (isReady&&text.text!=null&&temp==10&&!first){
+		if (isReady&&text.text!=null&&temp==20&&!first){
 			conver.GetComponent<Conversations>().CheckIfCorrectText();
 
 		}
