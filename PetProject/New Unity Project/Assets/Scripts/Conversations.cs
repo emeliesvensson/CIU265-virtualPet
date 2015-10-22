@@ -17,6 +17,7 @@ public class Conversations : MonoBehaviour {
 	public AudioSource soundSource;
 
 	public Image speechBubble; 
+	private int tries = 0;
 
 
 	// Use this for initialization
@@ -83,13 +84,23 @@ public class Conversations : MonoBehaviour {
 				txt.text="compared: "+sCompare.ToLower () + " " +frenchLines [index].ToLower ();
 		}*/
 		//TODO to here
-		if (sCompare.ToLower () == frenchLines [index].ToLower ()||sCompare.ToLower () == altFrenchLines [index].ToLower ()) {
+		if (tries == 5) 
+		{
+			cat.triggerSad();
+			tries = 0;
+			ChangeText();
+		}
+
+
+		else if (sCompare.ToLower () == frenchLines [index].ToLower ()|| sCompare.ToLower () == altFrenchLines [index].ToLower () ) {
 			cat.triggerHappySailJump ();
 			ChangeText ();
+			tries = 0;
 		}
 		else {
 			cat.triggerAngry();
 			PlaySound ();
+			tries++;
 		}
 
 	}

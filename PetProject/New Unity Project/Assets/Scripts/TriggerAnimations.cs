@@ -5,6 +5,7 @@ public class TriggerAnimations : MonoBehaviour {
 	public AnimationClip angry;
 	public AnimationClip sailJump;
 	public AnimationClip happy;
+	public AnimationClip sad;
 	private Animation anim;
 	private GameObject canvas;
 
@@ -54,6 +55,11 @@ public class TriggerAnimations : MonoBehaviour {
 	public void triggerHappySailJump(){
 		anim.CrossFade (sailJump.name);
 		//canvas.GetComponent<Conversations> ().ChangeText ();
+	}
+
+	public void triggerSad(){
+		
+		anim.CrossFade (sad.name);
 	}
 
 }
