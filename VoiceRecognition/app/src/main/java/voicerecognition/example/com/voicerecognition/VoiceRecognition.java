@@ -162,7 +162,7 @@ public class VoiceRecognition {
                         Toast.makeText(context, "1", Toast.LENGTH_SHORT).show();
 
                     } else if (error == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
-                        Toast.makeText(context, "2", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(context, "2", Toast.LENGTH_SHORT).show();
 
                     } else if (error == SpeechRecognizer.ERROR_CLIENT) {
                         Toast.makeText(context, "3", Toast.LENGTH_SHORT).show();
@@ -177,10 +177,11 @@ public class VoiceRecognition {
                         Toast.makeText(context, "6", Toast.LENGTH_SHORT).show();
 
                     } else if (error == SpeechRecognizer.ERROR_NO_MATCH) {
-                        Toast.makeText(context, "7", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(context, "7", Toast.LENGTH_SHORT).show();
 
                     } else if (error == SpeechRecognizer.ERROR_RECOGNIZER_BUSY) {
-                        Toast.makeText(context, "8", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(context, "8", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Sparky is tired, please restart the App", Toast.LENGTH_LONG).show();
 
                     } else if (error == SpeechRecognizer.ERROR_SERVER) {
                         Toast.makeText(context, "9", Toast.LENGTH_SHORT).show();
